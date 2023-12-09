@@ -1,0 +1,24 @@
+version: '3'
+
+dotenv: ['.env']
+
+tasks:
+  run:
+    cmds:
+    - go run cmd/main.go -debug
+
+  test:
+    cmds:
+      - go test ./... -v
+
+  compile:
+    cmds:
+    - go build -o bin/app cmd/main.go
+
+  build:
+    cmds:
+    - docker build --no-cache --progress=plain -t mekpin/go-project-template:{{ .CLI_ARGS }} .
+
+  clean:
+    cmds:
+    - rm *.sql.tar.gz
